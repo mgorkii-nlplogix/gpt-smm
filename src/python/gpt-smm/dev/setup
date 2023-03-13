@@ -1,0 +1,19 @@
+#! /bin/bash
+
+set -e
+
+
+CURRENT_DIRECTORY=$BASH_SOURCE
+# GPT_SMM_PATH is one level up from the current directory
+GPT_SMM_PATH=$(dirname "${CURRENT_DIRECTORY}")/..
+rm -rf "${GPT_SMM_PATH}/.venv"
+echo "create new virtual environment"
+python3.8 -m venv "${GPT_SMM_PATH}/.venv"
+source "${GPT_SMM_PATH}/.venv/bin/activate"
+
+# installing the dependencies
+echo "installing the dependencies ..."
+(cd "${GPT_SMM_PATH}" && pip install --upgrade pip && pip install -r requirements.txt)
+
+
+
